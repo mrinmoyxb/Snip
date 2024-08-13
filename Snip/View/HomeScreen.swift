@@ -39,13 +39,23 @@ struct HomeScreen: View {
                         // url textfield
                         VStack {
                             TextField("", text: $temp, prompt: Text("Enter your URL").foregroundColor(.black)).fontWeight(.regular)
-                                .padding(.leading, 20)
-                                .frame(height: 70)
-                                .font(.system(size: 20))
-                                .background(Color("PrimaryYellow"))
-                                .foregroundColor(.black)
-                                .cornerRadius(40)
-                                .padding()
+                                    .padding(.leading, 20)
+                                    .frame(height: 70)
+                                    .font(.system(size: 20))
+                                    .background(Color("PrimaryYellow"))
+                                    .foregroundColor(.black)
+                                    .cornerRadius(40)
+                                    .padding()
+                        }
+                        VStack{
+                            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                                Text("Snip")
+                                    .frame(width: 100, height: 45)
+                                    .fontWeight(.regular)
+                                    .foregroundColor(.black)
+                                    .background(Color(.white))
+                                    .cornerRadius(30)
+                            })
                         }
 
                     }
