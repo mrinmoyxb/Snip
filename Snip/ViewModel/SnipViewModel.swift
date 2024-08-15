@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+class SnipViewModel: ObservableObject{
+    @Published var inputUrl: String = ""
+}

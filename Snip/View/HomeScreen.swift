@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeScreen: View {
     
-    @State var temp: String = ""
+    @StateObject var snipViewModel: SnipViewModel = SnipViewModel()
     
     var body: some View {
             VStack{
@@ -19,10 +19,11 @@ struct HomeScreen: View {
                         .frame(width: UIScreen.main.bounds.width)
                         .frame(height: (UIScreen.main.bounds.height)/2+40)
                         .foregroundColor(Color("PrimaryGreen"))
+                        .cornerRadius(0)
                         .ignoresSafeArea()
                     
                     // heaidng and textfield
-                    VStack{
+                    VStack(spacing: 20){
                         // heading and subheading
                         VStack(alignment: .leading){
                             Text("Snip")
@@ -38,16 +39,17 @@ struct HomeScreen: View {
                         }
                         // url textfield
                         VStack {
-                            TextField("", text: $temp, prompt: Text("Enter your URL").foregroundColor(.black)).fontWeight(.regular)
-                                    .padding(.leading, 20)
+                            TextField("", text: $snipViewModel.inputUrl, prompt: Text("Enter your URL").foregroundColor(.black)).fontWeight(.regular)
+                                .padding([.leading,.trailing], 20)
                                     .frame(height: 70)
                                     .font(.system(size: 20))
                                     .background(Color("PrimaryYellow"))
                                     .foregroundColor(.black)
                                     .cornerRadius(40)
+                                    .autocorrectionDisabled()
+                                    .textInputAutocapitalization(.never)
                                     .padding()
-                        }
-                        VStack{
+                            
                             Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
                                 Text("Snip")
                                     .frame(width: 100, height: 45)
@@ -57,12 +59,12 @@ struct HomeScreen: View {
                                     .cornerRadius(30)
                             })
                         }
+                        
 
                     }
                     
                 }
                 Spacer()
-                
                 
                 Spacer()
                 
