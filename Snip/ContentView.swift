@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    var apiService = APIService()
+    var viewModel: SnipViewModel = SnipViewModel()
     
     var body: some View {
         VStack {

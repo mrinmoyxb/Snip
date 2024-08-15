@@ -11,10 +11,17 @@ struct AllURLModel: Codable{
     let msg: [URLModel]
 }
 
-struct URLModel: Codable{
+struct URLModel: Codable, Identifiable{
+    let id: Int
     let shortId: String
     let redirectUrl: String
-    let visitHistory: [VisitHistoryModel]
+    //let visitHistory: [VisitHistoryModel]
+    
+    enum CodingKeys: String, CodingKey{
+        case shortId
+        case redirectUrl
+        case id = "__v"
+    }
 }
 
 struct VisitHistoryModel: Codable{

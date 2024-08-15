@@ -13,18 +13,19 @@ class APIService {
         guard let url = URL(string: urlString) else{
             throw URLError(.badURL)
         }
-        
+        print("START")
         let(data, response) = try await URLSession.shared.data(from: url)
         guard let httpResponse =  response as? HTTPURLResponse, httpResponse.statusCode == 200 else{
             dump(response)
-            return []
+            throw URLError(.badServerResponse)
         }
-        
+        print("TEST")
         let urlData = try JSONDecoder().decode(AllURLModel.self, from: data)
-        print("URL: \(urlData)")
+        print("DONE")
         let fetchedUrls: [URLModel] = urlData.msg.flatMap{ msg -> [URLModel] in
             return [msg]
         }
+        print("URLS: \(fetchedUrls)")
         return fetchedUrls
     }
     
