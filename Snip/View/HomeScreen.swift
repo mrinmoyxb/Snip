@@ -59,13 +59,33 @@ struct HomeScreen: View {
                                     .cornerRadius(30)
                             })
                         }
-                        
 
                     }
                     
                 }
                 Spacer()
                 
+                ZStack {
+                    Rectangle()
+                        .foregroundColor(.black)
+                        .cornerRadius(40)
+                        .frame(height: 80)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+
+                    HStack {
+                        Text(verbatim: "www.google.com")
+                            .frame(width: 280, alignment: .leading)
+                            .font(.system(size: 20))
+                            .fontWeight(.medium)
+                            .foregroundColor(.white)
+
+                        Image(systemName: "doc.fill")
+                            .foregroundColor(.white)
+                            .font(.system(size: 25))
+                    }
+                }
+                    
                 Spacer()
                 
             }.frame(maxWidth: .infinity, maxHeight: .infinity)

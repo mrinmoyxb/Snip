@@ -20,13 +20,15 @@ class APIService {
             throw URLError(.badServerResponse)
         }
         print("TEST")
+        print("Data: \(data)")
         let urlData = try JSONDecoder().decode(AllURLModel.self, from: data)
         print("DONE")
+        print(urlData)
         let fetchedUrls: [URLModel] = urlData.msg.flatMap{ msg -> [URLModel] in
             return [msg]
         }
         print("URLS: \(fetchedUrls)")
-        return fetchedUrls
+        return urlData.msg
     }
     
 }

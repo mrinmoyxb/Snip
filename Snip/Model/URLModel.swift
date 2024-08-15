@@ -15,21 +15,24 @@ struct URLModel: Codable, Identifiable{
     let id: Int
     let shortId: String
     let redirectUrl: String
-    //let visitHistory: [VisitHistoryModel]
+    let noOfVisits: Int
+    //let visitHistory: VisitHistoryModel
     
     enum CodingKeys: String, CodingKey{
         case shortId
         case redirectUrl
+        //case visitHistory
+        case noOfVisits
         case id = "__v"
     }
 }
 
-struct VisitHistoryModel: Codable{
-    let timeStamp: Int32
-    let id: String
+struct VisitHistoryModel: Codable, Identifiable{
+    var id: Int
+    let timeStamp: Int64
     
     enum CodingKeys: String, CodingKey{
         case timeStamp
-        case id = "_id"
+        case id = "docId"
     }
 }
