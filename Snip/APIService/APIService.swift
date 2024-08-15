@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 class APIService {
     
     func getAllUrls() async throws -> [URLModel]{
@@ -13,21 +14,17 @@ class APIService {
         guard let url = URL(string: urlString) else{
             throw URLError(.badURL)
         }
-        print("START")
+
         let(data, response) = try await URLSession.shared.data(from: url)
         guard let httpResponse =  response as? HTTPURLResponse, httpResponse.statusCode == 200 else{
             dump(response)
             throw URLError(.badServerResponse)
         }
-        print("TEST")
-        print("Data: \(data)")
+        
         let urlData = try JSONDecoder().decode(AllURLModel.self, from: data)
-        print("DONE")
-        print(urlData)
         let fetchedUrls: [URLModel] = urlData.msg.flatMap{ msg -> [URLModel] in
             return [msg]
         }
-        print("URLS: \(fetchedUrls)")
         return urlData.msg
     }
     

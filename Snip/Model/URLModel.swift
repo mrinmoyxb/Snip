@@ -23,7 +23,7 @@ struct URLModel: Codable, Identifiable{
         case redirectUrl
         //case visitHistory
         case noOfVisits
-        case id = "__v"
+        case id = "urlId"
     }
 }
 

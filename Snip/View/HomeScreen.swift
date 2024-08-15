@@ -12,6 +12,7 @@ struct HomeScreen: View {
     @StateObject var snipViewModel: SnipViewModel = SnipViewModel()
     
     var body: some View {
+        ScrollView(.vertical){
             VStack{
                 ZStack{
                     // Top card
@@ -41,14 +42,14 @@ struct HomeScreen: View {
                         VStack {
                             TextField("", text: $snipViewModel.inputUrl, prompt: Text("Enter your URL").foregroundColor(.black)).fontWeight(.regular)
                                 .padding([.leading,.trailing], 20)
-                                    .frame(height: 70)
-                                    .font(.system(size: 20))
-                                    .background(Color("PrimaryYellow"))
-                                    .foregroundColor(.black)
-                                    .cornerRadius(40)
-                                    .autocorrectionDisabled()
-                                    .textInputAutocapitalization(.never)
-                                    .padding()
+                                .frame(height: 70)
+                                .font(.system(size: 20))
+                                .background(Color("PrimaryYellow"))
+                                .foregroundColor(.black)
+                                .cornerRadius(40)
+                                .autocorrectionDisabled()
+                                .textInputAutocapitalization(.never)
+                                .padding()
                             
                             Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
                                 Text("Snip")
@@ -59,7 +60,7 @@ struct HomeScreen: View {
                                     .cornerRadius(30)
                             })
                         }
-
+                        
                     }
                     
                 }
@@ -67,28 +68,36 @@ struct HomeScreen: View {
                 
                 ZStack {
                     Rectangle()
-                        .foregroundColor(.black)
-                        .cornerRadius(40)
+                        .foregroundColor(Color(.black))
+                        .cornerRadius(10)
                         .frame(height: 80)
                         .frame(maxWidth: .infinity)
                         .padding()
-
+                    
                     HStack {
                         Text(verbatim: "www.google.com")
                             .frame(width: 280, alignment: .leading)
                             .font(.system(size: 20))
                             .fontWeight(.medium)
                             .foregroundColor(.white)
-
+                        
                         Image(systemName: "doc.fill")
                             .foregroundColor(.white)
                             .font(.system(size: 25))
                     }
                 }
-                    
+                
+                
+                Text("Previous URLs")
+                
+                ForEach(snipViewModel.allUrls){url in
+                    FetchedURL(shortURL: url.shortId, noOfVisit: url.noOfVisits)
+                }
+                
                 Spacer()
                 
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
     }
 }
 
