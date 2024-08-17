@@ -39,6 +39,7 @@ struct VisitHistoryModel: Codable, Identifiable{
     }
 }
 
+
 // Model to shortened URL
 struct PostRequestModel: Codable{
     let url: String
@@ -49,3 +50,8 @@ struct PostResponseModel: Codable{
 }
 
 
+// Analytics model
+struct AnalyticsModel: Codable{
+    let originalUrl: String
+    let totalVisit: Int
+}

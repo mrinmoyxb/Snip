@@ -18,7 +18,7 @@ struct HomeScreen: View {
                     // Top card
                     Rectangle()
                         .ignoresSafeArea()
-                        .frame(width: .infinity)
+                        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
                         .frame(height: (UIScreen.main.bounds.height)/2+30)
                         .foregroundColor(Color("PrimaryGreen"))
                         .cornerRadius(0)
@@ -28,18 +28,20 @@ struct HomeScreen: View {
                     VStack(spacing: 20){
                         // heading and subheading
                         Spacer().frame(height: 80)
-                        VStack(alignment: .leading){
-                            Text("Snip")
-                                .font(.system(size: 40))
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                                .foregroundColor(.white)
-                            
-                            Text("Shorten your links, lengthen your reach")
-                                .font(.system(size: 18))
-                                .fontWeight(.regular)
-                                .foregroundColor(.white)
-                            
-                        }
+                        HStack{
+                            VStack(alignment: .leading){
+                                Text("Snip")
+                                    .font(.system(size: 40))
+                                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                    .foregroundColor(.white)
+                                
+                                Text("Shorten your links, lengthen your reach")
+                                    .font(.system(size: 18))
+                                    .fontWeight(.regular)
+                                    .foregroundColor(.white)
+                                
+                            }.padding([.leading, .trailing], 20)
+                        }.frame(maxWidth: .infinity, alignment: .leading)
                         // url textfield
                         VStack {
                             TextField("", text: $snipViewModel.inputUrl, prompt: Text("Enter your URL").foregroundColor(.black)).fontWeight(.regular)
@@ -71,6 +73,7 @@ struct HomeScreen: View {
                 
                 Spacer()
                 
+                // Second Section
                 ZStack {
                     Rectangle()
                         .foregroundColor(Color(.black))

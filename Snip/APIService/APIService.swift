@@ -57,10 +57,24 @@ class APIService {
         }
         
         let responseData = try JSONDecoder().decode(PostResponseModel.self, from: data)
-        print("\(responseData.short_url)")
         return responseData.short_url
     }
     
+    // POST: analytics model
+    func getAnalytics(requestUrl: String) async throws -> AnalyticsModel{
+        let urlString: String = "http://localhost:8000/api/url/analytics/\(requestUrl)"
+        guard let url = URL(string: urlString) else{
+            throw URLError(.badURL)
+        }
+        let (data, response) = try await URLSession.shared.data(from: url)
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else{
+            dump(response)
+            throw URLError(.badServerResponse)
+        }
+        print("DOne")
+        let urlData = try JSONDecoder().decode(AnalyticsModel.self, from: data)
+        print("URL : \(urlData)")
+        return urlData
+    }
+    
 }
-
-
