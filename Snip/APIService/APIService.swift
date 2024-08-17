@@ -18,29 +18,29 @@ struct OutputPost: Codable{
 
 class APIService {
     
-//    // GET request
-//    func getAllUrls() async throws -> [URLModel]{
-//        let urlString = "http://localhost:8001/api/url"
-//        guard let url = URL(string: urlString) else{
-//            throw URLError(.badURL)
-//        }
-//
-//        let(data, response) = try await URLSession.shared.data(from: url)
-//        guard let httpResponse =  response as? HTTPURLResponse, httpResponse.statusCode == 200 else{
-//            dump(response)
-//            throw URLError(.badServerResponse)
-//        }
-//        
-//        let urlData = try JSONDecoder().decode(AllURLModel.self, from: data)
-//        let fetchedUrls: [URLModel] = urlData.msg.flatMap{ msg -> [URLModel] in
-//            return [msg]
-//        }
-//        return fetchedUrls
-//    }
+    // GET: return all url details
+    func getAllUrls() async throws -> [URLModel]{
+        let urlString = "http://localhost:8000/api/url"
+        guard let url = URL(string: urlString) else{
+            throw URLError(.badURL)
+        }
+
+        let(data, response) = try await URLSession.shared.data(from: url)
+        guard let httpResponse =  response as? HTTPURLResponse, httpResponse.statusCode == 200 else{
+            dump(response)
+            throw URLError(.badServerResponse)
+        }
+        
+        let urlData = try JSONDecoder().decode(AllURLModel.self, from: data)
+        let fetchedUrls: [URLModel] = urlData.msg.flatMap{ msg -> [URLModel] in
+            return [msg]
+        }
+        return fetchedUrls
+    }
     
-    func postUrl() async throws -> String {
-        // Define the URL
-        guard let url = URL(string: "http://localhost:3000/api") else {
+    // POST: send URL and receive short URL
+    func postUrl(requestUrl: String) async throws -> String {
+        guard let url = URL(string: "http://localhost:8000/api/url/") else {
             throw URLError(.badURL)
         }
 
@@ -48,7 +48,7 @@ class APIService {
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        request.httpBody = try JSONEncoder().encode(InputPost(msg: "Hello"))
+        request.httpBody = try JSONEncoder().encode(PostRequestModel(url: requestUrl))
         let (data, response) = try await URLSession.shared.data(for: request)
         
 
@@ -56,9 +56,9 @@ class APIService {
             throw URLError(.badServerResponse)
         }
         
-        let responseData = try JSONDecoder().decode(OutputPost.self, from: data)
-        print("\(responseData.msg)")
-        return responseData.msg
+        let responseData = try JSONDecoder().decode(PostResponseModel.self, from: data)
+        print("\(responseData.short_url)")
+        return responseData.short_url
     }
     
 }

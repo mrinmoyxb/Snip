@@ -51,7 +51,9 @@ struct HomeScreen: View {
                                 .textInputAutocapitalization(.never)
                                 .padding()
                             
-                            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                            Button(action: {Task {
+                                await snipViewModel.sendPostRequest()
+                            }}, label: {
                                 Text("Snip")
                                     .frame(width: 100, height: 45)
                                     .fontWeight(.regular)
@@ -75,7 +77,7 @@ struct HomeScreen: View {
                         .padding()
                     
                     HStack {
-                        Text(verbatim: "www.google.com")
+                        Text(verbatim: "\(snipViewModel.postShortUrlResponse ?? "")")
                             .frame(width: 280, alignment: .leading)
                             .font(.system(size: 20))
                             .fontWeight(.medium)

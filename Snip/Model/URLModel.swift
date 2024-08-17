@@ -40,10 +40,12 @@ struct VisitHistoryModel: Codable, Identifiable{
 }
 
 // Model to shortened URL
-struct ShortUrlModel: Codable{
+struct PostRequestModel: Codable{
+    let url: String
+}
+
+struct PostResponseModel: Codable{
     let short_url: String
 }
 
-struct PostURLModel: Codable{
-    let url: String
-}
+
