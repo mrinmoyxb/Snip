@@ -13,19 +13,21 @@ struct HomeScreen: View {
     
     var body: some View {
         ScrollView(.vertical){
-            VStack{
+            LazyVStack{
                 ZStack{
                     // Top card
                     Rectangle()
-                        .frame(width: UIScreen.main.bounds.width)
-                        .frame(height: (UIScreen.main.bounds.height)/2+40)
+                        .ignoresSafeArea()
+                        .frame(width: .infinity)
+                        .frame(height: (UIScreen.main.bounds.height)/2+30)
                         .foregroundColor(Color("PrimaryGreen"))
                         .cornerRadius(0)
-                        .ignoresSafeArea()
+                       
                     
                     // heaidng and textfield
                     VStack(spacing: 20){
                         // heading and subheading
+                        Spacer().frame(height: 80)
                         VStack(alignment: .leading){
                             Text("Snip")
                                 .font(.system(size: 40))
@@ -65,7 +67,8 @@ struct HomeScreen: View {
                         
                     }
                     
-                }
+                }.background(Color("PrimaryGreen"))
+                
                 Spacer()
                 
                 ZStack {
@@ -77,7 +80,7 @@ struct HomeScreen: View {
                         .padding()
                     
                     HStack {
-                        Text(verbatim: "\(snipViewModel.postShortUrlResponse ?? "")")
+                        Text(verbatim: "\(snipViewModel.postShortUrlResponse ?? "Your short url here")")
                             .frame(width: 280, alignment: .leading)
                             .font(.system(size: 20))
                             .fontWeight(.medium)
@@ -89,8 +92,10 @@ struct HomeScreen: View {
                     }
                 }
                 
-                
-                Text("Previous URLs")
+                HStack{
+                    Text("Previous URLs")
+                        .padding(.horizontal)
+                }.frame(maxWidth: .infinity, alignment: .leading)
                 
                 ForEach(snipViewModel.allUrls){url in
                     FetchedURL(shortURL: url.shortId, noOfVisit: url.noOfVisits)
@@ -98,8 +103,8 @@ struct HomeScreen: View {
                 
                 Spacer()
                 
-            }.frame(maxWidth: .infinity, maxHeight: .infinity)
-        }
+            }.ignoresSafeArea()
+        }.ignoresSafeArea()
     }
 }
 
