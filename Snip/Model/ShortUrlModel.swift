@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct ShortUrlModel: Codable{
+    let msg: String
+}
+

@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+// Model to fetch URL info
 struct AllURLModel: Codable{
     let msg: [URLModel]
 }
@@ -35,4 +37,13 @@ struct VisitHistoryModel: Codable, Identifiable{
         case timeStamp
         case id = "docId"
     }
+}
+
+// Model to shortened URL
+struct ShortUrlModel: Codable{
+    let short_url: String
+}
+
+struct PostURLModel: Codable{
+    let url: String
 }
