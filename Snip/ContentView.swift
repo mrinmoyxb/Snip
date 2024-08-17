@@ -8,20 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
-    var viewModel: SnipViewModel = SnipViewModel()
-    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView{
+            HomeScreen()
+                .tabItem {
+                    Image(systemName: "house.fill")
+                        .font(.system(size: 20))
+                        .foregroundColor(.black)
+                    Text("Home")
+                }
             
-            Button(action: {}, label: {
-                Text("Button")
-            })
+            SearchScreen()
+                .tabItem {
+                    Image(systemName: "magnifyingglass.circle.fill")
+                        .font(.system(size: 20))
+                        .foregroundColor(.black)
+                    Text("Search")
+                }
         }
-        .padding()
     }
 }
 

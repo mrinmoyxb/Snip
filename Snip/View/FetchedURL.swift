@@ -19,7 +19,7 @@ struct FetchedURL: View {
                 .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
                 .frame(height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
                 .cornerRadius(20)
-                .padding(10)
+                .padding([.leading, .trailing], 10)
             
             HStack{
                 Text(verbatim: "http://localhost:8000/\(shortURL)")

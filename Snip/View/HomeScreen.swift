@@ -99,6 +99,7 @@ struct HomeScreen: View {
                 
                 ForEach(snipViewModel.allUrls){url in
                     FetchedURL(shortURL: url.shortId, noOfVisit: url.noOfVisits)
+                    Spacer().frame(height: 8)
                 }
                 
                 Spacer()
